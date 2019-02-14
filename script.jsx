@@ -1,20 +1,37 @@
+class Game extends React.Component {
+  constructor() {
+    super()
+    this.state = {}
+  }
+
+  render() {
+
+  }
+}
+
 class Board extends React.Component {
     constructor(){
-
       super()
-
       this.state = {
         board: [
-          ['i','i','i'],
-          ['i','i','i'],
-          ['i','i','i']
-        ]
+          [" "," "," "],
+          [" "," "," "],
+          [" "," "," "]
+        ],
+        playerCounter: 0
       }
 
     }
 
-    squareClick(something){
-        console.log( something );
+    squareClick(x,y){
+        let currentBoard = this.state.board;
+        if (this.state.playerCounter % 2 == 0) {
+          currentBoard[y][x] = 'X';
+        } else {
+          currentBoard[y][x] = 'O';
+        }
+
+        this.setState( { board: currentBoard, playerCounter: this.state.playerCounter+1 } );
     }
 
     render() {
@@ -27,16 +44,18 @@ class Board extends React.Component {
 
             // make each column
             return (
-                    <p
-                        className="boo"
+                    <div
+                        className="boo col text-center"
                         key={colIndex}
                         onClick={()=>{
-                            this.squareClick(colIndex);
+                            this.squareClick(colIndex, rowIndex);
                         }}
 
                     >
-                        {col} : {colIndex} : {rowIndex}
-                    </p>
+                        {
+                          col
+                        }
+                    </div>
             );
 
           });
